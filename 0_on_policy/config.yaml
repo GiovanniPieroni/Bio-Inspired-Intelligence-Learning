@@ -1,0 +1,51 @@
+# --- Initial Orbit Parameters ---
+orbit:
+  altitude_m: 350000.0         # Orbit altitude [m] (350 km)
+  eccentricity: 0.0           # Eccentricity [-]
+  inclination_deg: 30.0        # Inclination [deg]
+  raan_deg: 0.0                # Right Ascension of Ascending Node [deg]
+  arg_of_periapsis_deg: 0.0    # Argument of Periapsis [deg]
+  true_anomaly_deg: 0.0        # True Anomaly [deg]
+  earth_radius_m: 6378000.0    # Earth radius [m]
+  mu_m3_s2: 3.986004418e14      # Earth gravitational parameter [m^3/s^2]
+
+# --- Satellite & Propulsion Parameters ---
+satellite:
+  initial_mass_kg: 500.0       # Spacecraft initial total mass [kg]
+  propellant_mass_kg: 100.0    # Available propellant mass [kg]
+  isp_s: 300.0                 # Specific Impulse [s]
+  max_delta_v_mps: 50       # Max Delta-V per step [m/s]
+  max_coast_fraction: 0.5      # Max coasting time fraction per step (portion of orbital period)
+
+# --- Reinforcement Learning Parameters ---
+rl:
+  state_dim: 8          # [p_err, f_err, g_err, h_err, k_err, sin(L), cos(L), mass_norm]
+  action_dim: 4
+  num_episodes: 2000
+  batch_size: 100
+  gamma: 0.98                  # Discount factor (long-term horizon)
+  tau: 0.05                   # Soft update rate for target networks
+  actor_lr: 1.0e-5
+  critic_lr: 1.0e-3
+  exploration_noise: 0.15
+  buffer_capacity: 50000
+  penalty_weights: [1.0, 0.0]  # Weights for state error reduction and thrust penalty
+  # state_scales: [100000.0, 0.05, 0.05, 0.05, 0.05]  # normalisation for [p_err, f_err, g_err, h_err, k_err]
+  state_scales: [6e+05, 5.5e-02, 5.5e-02, 2.5e-02, 2.5e-02]
+  termination_tol: 1.0e2
+  integration_tol: 1.0e-9
+
+# --- Simulation Parameters ---
+simulation:
+  steps: 20
+  n_orbits_sim: 100.0            # Total simulation horizon (number of orbital periods)
+
+
+
+# --- Debug, Logging & File Paths ---
+debug:
+  verbose: true
+  save_plots: true
+  plots_dir: "Plots/test_eval"
+  actor_weights_path: "satellite_actor_DDPG.pth"
+  critic_weights_path: "satellite_critic_DDPG.pth"

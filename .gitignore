@@ -226,7 +226,7 @@ __marimo__/
 .vscode/
 
 
-/A2C
-test_ddpg.py
 *.png
 *.pth
+
+archive/

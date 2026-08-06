@@ -1,0 +1,16 @@
+# Core Deep Learning & Reinforcement Learning
+torch>=2.0.0
+
+# Orbital Mechanics & Astrodynamics Simulation Framework
+# (Note: tudatpy can also be installed via conda-forge: conda install -c conda-forge tudatpy)
+tudatpy>=1.0.0
+
+# Scientific Computing & Data Analysis
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Visualization & Plotting
+matplotlib>=3.7.0
+
+# Configuration Parsing
+PyYAML>=6.0

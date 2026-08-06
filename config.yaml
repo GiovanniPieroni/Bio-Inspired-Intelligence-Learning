@@ -1,0 +1,55 @@
+# --- Initial Orbit Parameters ---
+orbit:
+  altitude_m: 400000.0         # Orbit altitude [m] (400 km)
+  eccentricity: 0.0           # Eccentricity [-]
+  inclination_deg: 45.0        # Inclination [deg]
+  raan_deg: 0.0                # Right Ascension of Ascending Node [deg]
+  arg_of_periapsis_deg: 0.0    # Argument of Periapsis [deg]
+  true_anomaly_deg: 0.0        # True Anomaly [deg]
+  earth_radius_m: 6378000.0    # Earth radius [m]
+  mu_m3_s2: 3.986004418e14      # Earth gravitational parameter [m^3/s^2]
+
+# --- Satellite & Propulsion Parameters ---
+satellite:
+  initial_mass_kg: 500.0       # Spacecraft initial total mass [kg]
+  propellant_mass_kg: 100.0    # Available propellant mass [kg]
+  isp_s: 300.0                 # Specific Impulse [s]
+  max_delta_v_mps: 2       # Max Delta-V per step [m/s]
+  max_coast_fraction: 0.1      # Max coasting time fraction per step (portion of orbital period)
+
+# --- Reinforcement Learning Parameters ---
+rl:
+  state_dim: 8          # [p_err, f_err, g_err, h_err, k_err, sin(L), cos(L), mass_norm]
+  action_dim: 4
+  num_episodes: 500
+  batch_size: 500
+  gamma: 0.95                  # Discount factor (long-term horizon)
+  tau: 0.005                 # Soft update rate for target networks
+  actor_lr: 1.0e-5
+  critic_lr: 3.0e-5
+  exploration_noise: 0.15
+  min_noise: 0.01
+  noise_decay: 0.9975
+  buffer_capacity: 50000
+  buffer_beta: 0.2
+  penalty_weights: [1.0, 1.0]  # Weights for state error reduction and thrust penalty
+  # state_scales: [100000.0, 0.05, 0.05, 0.05, 0.05]  # normalisation for [p_err, f_err, g_err, h_err, k_err]
+  # state_scales: [6e+05, 5.5e-02, 5.5e-02, 2.5e-02, 2.5e-02]
+  state_scales: [1e+05, 5.5e-02, 5.5e-02, 2.5e-02, 2.5e-02]
+  termination_tol: 1.0e3
+  integration_tol: 1.0e-5
+
+# --- Simulation Parameters ---
+simulation:
+  steps: 250
+  n_orbits_sim: 20.0            # Total simulation horizon (number of orbital periods)
+
+
+
+# --- Debug, Logging & File Paths ---
+debug:
+  verbose: true
+  save_plots: true
+  plots_dir: "Plots/test_eval"
+  actor_weights_path: "satellite_actor_DDPG.pth"
+  critic_weights_path: "satellite_critic_DDPG.pth"
