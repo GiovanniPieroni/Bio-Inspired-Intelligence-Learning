@@ -230,3 +230,5 @@ __marimo__/
 *.pth
 
 archive/
+
+4_full_zero_shot_leo/

@@ -88,6 +88,8 @@ class RLConfig:
     integration_tol: float
     state_scales: list
     termination_tol: float
+    termination_tol_a: float
+    termination_tol_e: float
 
     def __post_init__(self):
         self.state_dim = int(self.state_dim)
@@ -107,6 +109,8 @@ class RLConfig:
         self.integration_tol = float(self.integration_tol)
         self.state_scales = [float(s) for s in self.state_scales]
         self.termination_tol = float(self.termination_tol)
+        self.termination_tol_a = float(self.termination_tol_a)
+        self.termination_tol_e = float(self.termination_tol_e)
 
 
 @dataclass

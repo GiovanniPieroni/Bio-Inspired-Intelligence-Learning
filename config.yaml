@@ -1,7 +1,7 @@
 # --- Initial Orbit Parameters ---
 orbit:
   altitude_m: 400000.0         # Orbit altitude [m] (400 km)
-  eccentricity: 0.0           # Eccentricity [-]
+  eccentricity: 0.001          # Eccentricity [-]
   inclination_deg: 45.0        # Inclination [deg]
   raan_deg: 0.0                # Right Ascension of Ascending Node [deg]
   arg_of_periapsis_deg: 0.0    # Argument of Periapsis [deg]
@@ -29,19 +29,21 @@ rl:
   critic_lr: 3.0e-5
   exploration_noise: 0.15
   min_noise: 0.01
-  noise_decay: 0.9975
+  noise_decay: 0.99
   buffer_capacity: 50000
   buffer_beta: 0.2
-  penalty_weights: [1.0, 1.0]  # Weights for state error reduction and thrust penalty
+  penalty_weights: [1.0, 1.0, 1.0]  # Weights for state error reduction and thrust penalty
   # state_scales: [100000.0, 0.05, 0.05, 0.05, 0.05]  # normalisation for [p_err, f_err, g_err, h_err, k_err]
   # state_scales: [6e+05, 5.5e-02, 5.5e-02, 2.5e-02, 2.5e-02]
-  state_scales: [1e+05, 5.5e-02, 5.5e-02, 2.5e-02, 2.5e-02]
+  state_scales: [1e+05, 3.5e-02, 5.5e-02, 2.5e-02, 2.5e-02]
   termination_tol: 1.0e3
+  termination_tol_a: 1.0e3
+  termination_tol_e: 5.0e-3
   integration_tol: 1.0e-5
 
 # --- Simulation Parameters ---
 simulation:
-  steps: 250
+  steps: 328
   n_orbits_sim: 20.0            # Total simulation horizon (number of orbital periods)
 
 
